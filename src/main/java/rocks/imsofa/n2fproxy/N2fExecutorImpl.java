@@ -125,21 +125,23 @@ public class N2fExecutorImpl implements N2fExecutor {
         public void run() {
             while (running) {
                 try {
-                    String str = FileUtils.readFileToString(statusFile, "utf-8");
-                    N2fExecutorEvent event = new N2fExecutorEvent();
-                    if (str != null && str.trim().length() > 0) {
-                        if (str.equals(lastString) == false) {
-                            lastString=str;
-                            if (str.startsWith("fast_n2f:")) {
-                                event.setStage("fast_n2f");
-                            } else if (str.startsWith("RCS:")) {
-                                event.setStage("RCS");
-                            } else {
-                                event.setStage("other");
-                            }
-                            event.setMessage(str);
-                            for (N2fExecutorListener l : listeners) {
-                                l.statusUpdated(event);
+                    if (statusFile.exists()) {
+                        String str = FileUtils.readFileToString(statusFile, "utf-8");
+                        N2fExecutorEvent event = new N2fExecutorEvent();
+                        if (str != null && str.trim().length() > 0) {
+                            if (str.equals(lastString) == false) {
+                                lastString = str;
+                                if (str.startsWith("fast_n2f:")) {
+                                    event.setStage("fast_n2f");
+                                } else if (str.startsWith("RCS:")) {
+                                    event.setStage("RCS");
+                                } else {
+                                    event.setStage("other");
+                                }
+                                event.setMessage(str);
+                                for (N2fExecutorListener l : listeners) {
+                                    l.statusUpdated(event);
+                                }
                             }
                         }
                     }
