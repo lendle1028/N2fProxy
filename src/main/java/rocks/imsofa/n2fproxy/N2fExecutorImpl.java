@@ -125,7 +125,7 @@ public class N2fExecutorImpl implements N2fExecutor {
         public void run() {
             while (running) {
                 try {
-                    if (statusFile.exists()) {
+                    if (statusFile!=null && statusFile.exists()) {
                         String str = FileUtils.readFileToString(statusFile, "utf-8");
                         N2fExecutorEvent event = new N2fExecutorEvent();
                         if (str != null && str.trim().length() > 0) {
