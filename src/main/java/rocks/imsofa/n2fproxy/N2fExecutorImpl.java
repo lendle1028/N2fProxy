@@ -73,7 +73,7 @@ public class N2fExecutorImpl implements N2fExecutor {
             process = pb.start();
             process.waitFor();
             statusMonitorThread.shutdown();
-            statusMonitorThread = null;
+            statusMonitorThread = new StatusMonitorThread();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
