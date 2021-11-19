@@ -26,6 +26,7 @@ public class N2fExecutorImpl implements N2fExecutor {
     private File dataDirectory = null;
     private List<N2fExecutorListener> listeners = new ArrayList<>();
     private StatusMonitorThread statusMonitorThread = new StatusMonitorThread();
+    private static int counter=0;
 
     public N2fExecutorImpl(File homeDirectory) {
         this.homeDirectory = homeDirectory;
@@ -49,7 +50,7 @@ public class N2fExecutorImpl implements N2fExecutor {
     public synchronized void execute(long numSubspaces, long frequency, double theta, double phi) {
         try {
             statusMonitorThread.start();
-            resultDirectory = new File(homeDirectory, "results_" + System.currentTimeMillis());
+            resultDirectory = new File(homeDirectory, "results_" + System.currentTimeMillis()+(counter++));
             FileUtils.forceMkdir(resultDirectory);
             n2fDirectoryInResult = new File(resultDirectory, ".n2f");
             FileUtils.forceMkdir(n2fDirectoryInResult);

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>rocks.imsofa</groupId>
     <artifactId>N2fProxy</artifactId>
-    <version>0.92</version>
+    <version>0.93</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
