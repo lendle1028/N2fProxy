@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -86,7 +88,7 @@ public class N2fExecutorImpl implements N2fExecutor {
             File resultFile = new File(resultDirectory, "RCS_total.csv");
             List<String> lines = FileUtils.readLines(resultFile, "utf-8");
             double[] results = new double[lines.size()];
-            for (int i = 0; i < lines.size(); i++) {
+            for (int i = 0; i < lines.size()-1; i++) {
                 results[i] = Double.valueOf(lines.get(i));
             }
             return results;
@@ -108,6 +110,18 @@ public class N2fExecutorImpl implements N2fExecutor {
     @Override
     public void addN2fExecutorListener(N2fExecutorListener l) {
         this.listeners.add(l);
+    }
+
+    @Override
+    public double getRCSTotal() {
+        try {
+            File resultFile = new File(resultDirectory, "RCS_total.csv");
+            List<String> lines = FileUtils.readLines(resultFile, "utf-8");
+            return Double.valueOf(lines.get(lines.size()-1));
+        } catch (IOException ex) {
+            Logger.getLogger(N2fExecutorImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
     class StatusMonitorThread extends Thread {

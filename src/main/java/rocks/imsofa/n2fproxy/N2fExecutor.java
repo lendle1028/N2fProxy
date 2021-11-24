@@ -17,4 +17,5 @@ public interface N2fExecutor {
     public void execute(long numSubspaces, long frequency, double theta, double phi);
     public void close();
     public double [] getResults();
+    public double getRCSTotal();
 }
