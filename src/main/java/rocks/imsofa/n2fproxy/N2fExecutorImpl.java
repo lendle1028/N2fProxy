@@ -8,6 +8,7 @@ package rocks.imsofa.n2fproxy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +62,7 @@ public class N2fExecutorImpl implements N2fExecutor {
             ProcessBuilder pb = new ProcessBuilder();
             pb = pb.directory(homeDirectory);
             pb = pb.redirectErrorStream(true);
-            pb = pb.redirectOutput(ProcessBuilder.Redirect.to(new File("cpscript.log")));
+            pb = pb.redirectOutput(ProcessBuilder.Redirect.to(new File(homeDirectory, "cpscript.log")));
             pb = pb.command("./cpscript", "" + numSubspaces, "" + frequency, dataDirectory.getAbsolutePath(), resultDirectory.getAbsolutePath());
             Process process = pb.start();
             process.waitFor();
@@ -71,8 +72,9 @@ public class N2fExecutorImpl implements N2fExecutor {
             pb = new ProcessBuilder();
             pb = pb.directory(homeDirectory);
             pb = pb.redirectErrorStream(true);
-            pb = pb.redirectOutput(ProcessBuilder.Redirect.to(new File("RCS_code.log")));
+            pb = pb.redirectOutput(ProcessBuilder.Redirect.to(new File(homeDirectory, "RCS_code.log")));
             pb = pb.command("octave-cli", "RCS_code.m", resultDirectory.getAbsolutePath() + "/", "" + numSubspaces, "" + theta, "" + phi);
+            System.out.println(Arrays.deepToString(pb.command().toArray()));
             process = pb.start();
             process.waitFor();
             statusMonitorThread.shutdown();

@@ -25,8 +25,11 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        N2fExecutor executor=new N2fExecutorImpl(new File("."));
-        executor.init(new File(args[2]));
+        args=new String[]{"2", "1000", "/home/lendle/Desktop/test/angle0", "90", "0"};
+        N2fExecutor executor=new N2fExecutorImpl(new File("/home/lendle/dev/projects/1101/jzy3d_test/n2ftools"));
+        try{
+            executor.init(new File(args[2]));
+        }catch(Throwable e){}
         executor.addN2fExecutorListener(new N2fExecutorListener(){
             public void statusUpdated(N2fExecutorEvent e){
                 System.out.println(e.getMessage());
