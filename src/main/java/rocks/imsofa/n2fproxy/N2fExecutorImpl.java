@@ -89,7 +89,7 @@ public class N2fExecutorImpl implements N2fExecutor {
         try {
             File resultFile = new File(resultDirectory, "RCS_total.csv");
             List<String> lines = FileUtils.readLines(resultFile, "utf-8");
-            double[] results = new double[lines.size()];
+            double[] results = new double[lines.size()-1];
             for (int i = 0; i < lines.size()-1; i++) {
                 results[i] = Double.valueOf(lines.get(i));
             }
