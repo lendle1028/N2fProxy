@@ -93,6 +93,7 @@ public class N2fExecutorImpl implements N2fExecutor {
             for (int i = 0; i < lines.size()-1; i++) {
                 results[i] = Double.valueOf(lines.get(i));
             }
+            System.out.println(results.length);
             return results;
         } catch (IOException ex) {
             throw new RuntimeException(ex);

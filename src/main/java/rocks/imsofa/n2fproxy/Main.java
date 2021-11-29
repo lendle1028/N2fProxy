@@ -25,7 +25,7 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        args=new String[]{"2", "1000", "/home/lendle/Desktop/test/angle0", "90", "0"};
+        args=new String[]{"8", "1000", "/home/lendle/Desktop/test/angle0", "0", "0"};
         N2fExecutor executor=new N2fExecutorImpl(new File("/home/lendle/dev/projects/1101/jzy3d_test/n2ftools"));
         try{
             executor.init(new File(args[2]));
@@ -37,7 +37,7 @@ public class Main {
         });
         executor.execute(Long.valueOf(args[0]), Long.valueOf(args[1]), Double.valueOf(args[3]), Double.valueOf(args[4]));
         System.out.println(Arrays.toString(executor.getResults()));
-        executor.close();
+//        executor.close();
     }
     
 }
