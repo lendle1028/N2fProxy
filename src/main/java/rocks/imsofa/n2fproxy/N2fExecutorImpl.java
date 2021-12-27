@@ -50,7 +50,7 @@ public class N2fExecutorImpl implements N2fExecutor {
     }
 
     @Override
-    public synchronized void execute(long numSubspaces, long frequency, double theta, double phi) {
+    public synchronized void execute(long numSubspaces, long frequency, double theta, double phi, int delta) {
         try {
             statusMonitorThread.start();
             resultDirectory = new File(homeDirectory, "results_" + System.currentTimeMillis()+(counter++));
@@ -63,7 +63,7 @@ public class N2fExecutorImpl implements N2fExecutor {
             pb = pb.directory(homeDirectory);
             pb = pb.redirectErrorStream(true);
             pb = pb.redirectOutput(ProcessBuilder.Redirect.to(new File(homeDirectory, "cpscript.log")));
-            pb = pb.command("./cpscript", "" + numSubspaces, "" + frequency, dataDirectory.getAbsolutePath(), resultDirectory.getAbsolutePath());
+            pb = pb.command("./cpscript", "" + numSubspaces, "" + frequency, dataDirectory.getAbsolutePath(), resultDirectory.getAbsolutePath(), ""+delta);
             Process process = pb.start();
             process.waitFor();
             FileUtils.copyDirectory(new File(dataDirectory, "ap"), resultDirectory);

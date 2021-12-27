@@ -14,7 +14,7 @@ import java.io.File;
 public interface N2fExecutor {
     public void addN2fExecutorListener(N2fExecutorListener l);
     public void init(File dataDirectory);
-    public void execute(long numSubspaces, long frequency, double theta, double phi);
+    public void execute(long numSubspaces, long frequency, double theta, double phi, int delta);
     public void close();
     public double [] getResults();
     public double getRCSTotal();
